@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <link rel="stylesheet" href="calc.css">
+    <title>Calculator</title>
+</head>
+<body class="body">
+    <div>
+        <h1 class="heading">
+            Basic Calculator
+        </h1>
+    </div>
+    <div class="container">
+        <div class="calculator">
+            <form action="">
+                <div class="box">
+                    <div class="display1">
+                        <input type="text" name="display" class="displayInput" id="disp" readonly>
+                    </div>
+                    <div class="display2">
+                        <input type="text" value="0" name="displayResult" class="displayCalc" readonly>
+                    </div>
+                </div>
+                <div>
+                    <input type="button" value="(" onclick="display.value += '(' " class="operator fontsize hovr">
+                    <input type="button" value=")" onclick="display.value += ')'" class="operator fontsize hovr">
+                    <input type="button" value="ans" onclick="displayResult.value = eval(display.value)" class="operator hovr">
+                    <input type="button" value="del" onclick="display.value = display.value.toString().slice(0,-1) " class="operator hovr">
+                    <input type="button" value="clear" onclick="display.value = '' ,displayResult.value = '0'" class="operator hovr">
+                </div>
+                <div>        
+                    <input type="button" value="7" onclick="display.value += '7'"  class="fontsize hovr">
+                    <input type="button" value="8" onclick="display.value += '8' " class="fontsize hovr">
+                    <input type="button" value="9" onclick="display.value += '9' " class="fontsize hovr">
+                    <input type="button" value="%" onclick="oper(display.value,'%')" class="operator fontsize hovr">
+                    <input type="button" value= "&#x221A" onclick="displayResult.value = Math.sqrt(eval(display.value))" class="operator hovr">
+                </div>
+                <div>
+                    <input type="button" value="4" onclick="display.value += '4' " class="fontsize hovr">
+                    <input type="button" value="5" onclick="display.value += '5' " class="fontsize hovr">
+                    <input type="button" value="6" onclick="display.value += '6' " class="fontsize hovr">
+                    <input type="button" value="*" onclick="oper(display.value,'*')" class="operator fontsize hovr">
+                    <input type="button" value= "/" onclick="oper(display.value,'/') " class="operator fontsize hovr">
+                </div>
+                <div>        
+                    <input type="button" value="1" onclick="display.value += '1' " class="fontsize hovr">
+                    <input type="button" value="2" onclick="display.value += '2' " class="fontsize hovr">
+                    <input type="button" value="3" onclick="display.value += '3' " class="fontsize hovr">
+                    <input type="button" value="+" onclick="oper(display.value,'+')" class="operator fontsize hovr">
+                    <input type="button" value= "-" onclick="oper(display.value,'-') " class="operator fontsize hovr">
+                </div>
+                <div>        
+                    <input type="button" value="." onclick="display.value += '.' " class="operator fontsize hovr" >
+                    <input type="button" value="0" onclick="zero(display.value)" class="fontsize hovr">
+                    <input type="button" value="±" onclick="plusminus(display.value)" class="operator fontsize hovr" id="plus">
+                    <input type="button" value="ENTER" class="enter hovr" onclick="displayResult.value = eval(display.value)">
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function zero(input){
+            if(input != "0"){
+                document.getElementById("disp").value += '0';
+            }
+        }
+        function plusminus(input){
+            let s = input.length;
+            if(s != 0){
+                let str = "";
+                if(input[0] == '-'){
+                    str += input.slice(1,s);
+                }
+                else{
+                    str += '-' + input;
+                }
+                document.getElementById("disp").value = str;
+            }
+        }
+        function oper(input,op){
+            let s = input.length;
+            if(s != 0){
+                let lastchar = input[s-1];
+                let str = input.slice(0,s-1);
+                if(lastchar == '/' || lastchar == '%' || lastchar == '-' || lastchar == '+' || lastchar == '*'){
+                    str += op;
+                }
+                else{
+                    str += input[s-1]+op;
+                }
+                document.getElementById("disp").value = str;
+            }
+            else{
+                document.getElementById("disp").value = op;
+            }
+        }
+    </script>
+</body>
+</html>
